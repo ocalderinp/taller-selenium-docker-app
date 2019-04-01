@@ -1,5 +1,6 @@
 @Login
 Feature: Login Application
+  Como usuario quiero intentar acceder a la aplicacion
 
   Scenario: Successfull Login
     Given navego a la pagina de inicio
