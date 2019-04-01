@@ -6,4 +6,6 @@ reports/*
 !reports/cucumber-reports/.dummy
 
 #ignore intellij idea files
-.idea/*
+.idea/
+target
+*.iml
