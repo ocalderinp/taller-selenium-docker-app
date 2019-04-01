@@ -97,8 +97,8 @@
                 <!--<version>${maven.surefire.plugin.version}</version>-->
                 <!--<configuration>-->
                     <!--<argLine>-->
-                        <!-- -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar-->
-                        <!-- -Dcucumber.options="&#45;&#45;plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"-->
+                         <!-- -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar-->
+                         <!-- -Dcucumber.options="&#45;&#45;plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"-->
                     <!--</argLine>-->
                 <!--</configuration>-->
                 <!--<dependencies>-->

@@ -3,12 +3,10 @@ package runners;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utils.TestContext;
 
 @CucumberOptions(
         features = "src/test/java/features",
@@ -24,13 +22,9 @@ import utils.TestContext;
 )
 public class TestActualRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
-    private TestContext context;
-    private WebDriver driver;
 
     @BeforeClass(alwaysRun = true)
     public void setUpClass() {
-        this.context = new TestContext();
-        this.driver = this.context.getWebDriverManager().getDriver();
         this.testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
     }
 
@@ -46,7 +40,6 @@ public class TestActualRunner {
 
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
-        this.context.getWebDriverManager().quitDriver();
         this.testNGCucumberRunner.finish();
     }
 }

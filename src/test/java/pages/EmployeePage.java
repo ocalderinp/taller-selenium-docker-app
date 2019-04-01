@@ -23,7 +23,7 @@ public class EmployeePage extends BasePage {
     @CacheLookup
     private WebElement addressInput;
 
-    @FindBy(how = How.ID, using = "city")
+    @FindBy(how = How.CSS, using = "input[placeholder='City']")
     @CacheLookup
     private WebElement cityInput;
 

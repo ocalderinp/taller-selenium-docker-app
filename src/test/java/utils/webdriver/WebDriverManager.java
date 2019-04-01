@@ -22,8 +22,6 @@ public class WebDriverManager {
     private static String environment = properties.getString("ENVIRONMENT").toUpperCase();
     private static URL hub;
 
-    public WebDriverManager(){}
-
     public WebDriver getDriver(){
         if(getEnvironment().equals(EnvironmentType.REMOTE)){
             try {
