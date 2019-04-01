@@ -71,7 +71,6 @@ public class WebDriverManager {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-extensions");
         options.addArguments("disable-infobars");
-        options.addArguments("headless");
         return options;
     }
 
