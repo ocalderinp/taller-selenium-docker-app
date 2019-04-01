@@ -1,1 +1,9 @@
-reports
+# ignore files in folder reports
+reports/* 
+
+# but keep the folder
+!reports/allure-reports/.dummy
+!reports/cucumber-reports/.dummy
+
+#ignore intellij idea files
+.idea/*
