@@ -24,6 +24,7 @@
         <allure.version>1.5.4</allure.version>
         <aspectj.version>1.8.10</aspectj.version>
         <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+        <suite>REGRESSION</suite>
     </properties>
 
     <dependencies>
@@ -89,26 +90,41 @@
         </dependency>
     </dependencies>
 
-    <!--<build>-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/java/runners/${suite}.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-surefire-plugin</artifactId>-->
+        <!--<version>${maven.surefire.plugin.version}</version>-->
+        <!--<configuration>-->
+        <!--<argLine>-->
+        <!-- -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar-->
+        <!-- -Dcucumber.options="&#45;&#45;plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"-->
+        <!--</argLine>-->
+        <!--</configuration>-->
+        <!--<dependencies>-->
+        <!--<dependency>-->
+        <!--<groupId>org.aspectj</groupId>-->
+        <!--<artifactId>aspectjweaver</artifactId>-->
+        <!--<version>${aspectj.version}</version>-->
+        <!--</dependency>-->
+        <!--</dependencies>-->
+        <!--</plugin>-->
+
         <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<version>${maven.surefire.plugin.version}</version>-->
-                <!--<configuration>-->
-                    <!--<argLine>-->
-                         <!-- -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar-->
-                         <!-- -Dcucumber.options="&#45;&#45;plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"-->
-                    <!--</argLine>-->
-                <!--</configuration>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.aspectj</groupId>-->
-                        <!--<artifactId>aspectjweaver</artifactId>-->
-                        <!--<version>${aspectj.version}</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
-            <!--</plugin>-->
+
         <!--</plugins>-->
-    <!--</build>-->
+    </build>
 </project>

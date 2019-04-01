@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression">
+    <test name="All test">
+        <packages>
+            <package name="runners.RegressionRunner"/>
+        </packages>
+    </test>
+</suite>
