@@ -3,8 +3,7 @@ reports/*
 
 # but keep the folder
 !reports/.dummy
-!reports/allure-reports/.dummy
-!reports/cucumber-reports/.dummy
+
 
 #ignore intellij idea files
 .idea/

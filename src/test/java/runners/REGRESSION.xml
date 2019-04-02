@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression">
-    <test name="All test">
+<suite name="Regression" parallel="tests" thread-count="2">
+    <test name="All test chrome">
+        <parameter name="browser" value="chrome" />
         <classes>
-            <class name="runners.RegressionRunner"></class>
+            <class name="runners.RegressionRunner" />
+        </classes>
+    </test>
+    <test name="All test firefox">
+        <parameter name="browser" value="firefox" />
+        <classes>
+            <class name="runners.RegressionRunner" />
         </classes>
     </test>
 </suite>

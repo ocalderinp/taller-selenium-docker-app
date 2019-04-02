@@ -18,8 +18,8 @@ public class WebDriverManager {
     private WebDriver driver = null;
     private static final Logger LOGGER = Logger.getLogger(WebDriverManager.class);
     private static GetProperties properties = new GetProperties();
-    private static String browser = properties.getString("BROWSER").toUpperCase();
     private static String environment = properties.getString("ENVIRONMENT").toUpperCase();
+    private String browser;
     private static URL hub;
 
     public WebDriver getDriver(){
@@ -47,6 +47,7 @@ public class WebDriverManager {
 
     private WebDriver createDriver() {
         LOGGER.info("OS detected: " + System.getProperty("os.name").toUpperCase());
+        this.browser = System.getProperty("test.browser").toUpperCase();
         switch (getBrowserType()){
             case CHROME:
                 driver = (getEnvironment().equals(EnvironmentType.REMOTE))? new RemoteWebDriver(hub, getChromeOptions()) :
