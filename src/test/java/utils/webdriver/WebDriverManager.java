@@ -14,6 +14,9 @@ import utils.datatypes.EnvironmentType;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static utils.ReadArguments.applyDefaultIfMissing;
+
+
 public class WebDriverManager {
     private WebDriver driver = null;
     private static final Logger LOGGER = Logger.getLogger(WebDriverManager.class);
@@ -23,14 +26,10 @@ public class WebDriverManager {
     private static URL hub;
 
     public WebDriver getDriver(){
-        if(getEnvironment().equals(EnvironmentType.REMOTE)){
-            try {
-                hub = new URL(properties.getString("HUB"));
-            } catch (MalformedURLException e) {
-                LOGGER.error("Invalid hub url: " + hub.toString());
-            }
-        }
         if(driver == null){
+            if(getEnvironment().equals(EnvironmentType.REMOTE)) {
+                configureHub();
+            }
             driver = createDriver();
             driver.manage().window().maximize();
         }
@@ -64,6 +63,16 @@ public class WebDriverManager {
         } else LOGGER.info("Executing test in local environment");
         LOGGER.info("Browser selected: " + browser.toUpperCase());
         return driver;
+    }
+
+    private void configureHub(){
+        String auxHub = applyDefaultIfMissing(System.getProperty("hub"), properties.getString("HUB")) +
+                "/wd/hub/";
+        try {
+            hub = new URL(auxHub);
+        } catch (MalformedURLException e) {
+            LOGGER.error("Invalid hub url: " + hub.toString());
+        }
     }
 
     private ChromeOptions getChromeOptions(){
