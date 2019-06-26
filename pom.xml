@@ -21,14 +21,15 @@
         <selenium.version>3.141.59</selenium.version>
         <cucumber.version>1.2.5</cucumber.version>
         <log4j.version>1.2.17</log4j.version>
-        <allure.version>1.5.4</allure.version>
-        <aspectj.version>1.8.10</aspectj.version>
-        <allure.adaptor.version>1.6.4</allure.adaptor.version>
+        <cucumber.reporting.version>4.2.3</cucumber.reporting.version>
         <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <maven.cucumber.reporting.version>4.2.3</maven.cucumber.reporting.version>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suite>REGRESSION</suite>
+        <reports.directory>reports</reports.directory>
+        <name>docker-selenium-grid</name>
     </properties>
 
     <dependencies>
@@ -71,31 +72,18 @@
         </dependency>
 
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-core</artifactId>
-            <version>${allure.version}</version>
-            <type>pom</type>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${cucumber.reporting.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-java-aspects</artifactId>
-            <version>${allure.version}</version>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>${maven.cucumber.reporting.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-commons</artifactId>
-            <version>${allure.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-cucumber-jvm-adaptor</artifactId>
-            <version>${allure.adaptor.version}</version>
-        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -120,23 +108,30 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
-                <configuration>
-                <argLine>
-                 -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
-                 -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
-                </argLine>
-                </configuration>
-                <dependencies>
-                <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
-                </dependency>
-                </dependencies>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${maven.cucumber.reporting.version}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>taller-testinguy</projectName>
+                            <outputDirectory>${reports.directory}/cucumber-reports</outputDirectory>
+                            <inputDirectory>${reports.directory}</inputDirectory>
+                            <skip>false</skip>
+                            <checkBuildResult>true</checkBuildResult>
+                            <jsonFiles>
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>

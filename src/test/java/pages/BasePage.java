@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import utils.GetProperties;
 
 public class BasePage {
@@ -9,6 +10,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver){
         BasePage.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public boolean verifyTitle(String title){

@@ -6,9 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.concurrent.TimeUnit;
 
 public class EmployeePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h4[contains(text(), 'Add Employee')]")
@@ -55,7 +52,6 @@ public class EmployeePage extends BasePage {
 
     public EmployeePage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public boolean loggedInAsUser(String user) {
@@ -69,10 +65,10 @@ public class EmployeePage extends BasePage {
 
     public void logout() {
         linkLogout.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-    public void addEmployee(String name, String address, String city, String estado, String zipcode, String email, String telefono) {
+    public void addEmployee(String name, String address, String city, String estado, String zipcode, String email,
+                            String telefono) {
         nameInput.sendKeys(name);
         addressInput.sendKeys(address);
         cityInput.sendKeys(city);

@@ -3,7 +3,10 @@ package runners;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 @CucumberOptions(
         features = "src/test/java/features",
@@ -11,8 +14,7 @@ import org.testng.annotations.*;
         tags = {"@TestActual"},
         format = {
                 "pretty",
-                "html:reports/cucumber-reports/cucumber-pretty",
-                "json:reports/cucumber-reports/cucumber.json"
+                "html:reports/cucumber-pretty"
         },
         monochrome = true,
         strict = false
@@ -21,10 +23,8 @@ public class TestActualRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
 
     @BeforeClass(alwaysRun = true)
-    @Parameters("browser")
-    public void setUpClass(@Optional  String browser) {
+    public void setUpClass() {
         this.testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
-        System.setProperty("test.browser", browser != null? browser : "chrome");
     }
 
     @Test(dataProvider = "features")
